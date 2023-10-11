@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -82,20 +83,17 @@ public class PlayerControl : MonoBehaviour
     }
 
     //check if we've fallen out of bounds
-    void CheckReset()
+    public void StartReset(CinemachineImpulseSource source)
     {
-        if (bottomBounds.position.y > transform.position.y)
-        {
-            StopPhysics();
-            dead = true;
-            juiceEvents.FallDieJuiceStart();
-        }
+        StopPhysics();
+        dead = true;
+        juiceEvents.FallDieJuiceStart(source);
     }
 
     //stops our velocity
     public void StopPhysics()
     {
-        myBody.gravityScale = 0f;
+        myBody.gravityScale = 1f;
         myBody.velocity = new Vector3(0f, 0f, 0f);
     }
 
@@ -142,7 +140,7 @@ public class PlayerControl : MonoBehaviour
         else if (myBody.velocity.y < 0)
         {
             myBody.gravityScale = gravityFall;
-            CheckReset();
+           // CheckReset();
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerCollide : MonoBehaviour
 {
@@ -22,11 +23,19 @@ public class PlayerCollide : MonoBehaviour
         {
             PlayerControl.dead = true;
             playerControl.StopPhysics();
-            juiceEvents.EnemyDieJuiceStart();
+            juiceEvents.EnemyDieJuiceStart(collision.gameObject.GetComponent<CinemachineImpulseSource>());
         }
         if(collision.gameObject.name == "Goal")
         {
             canvas.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.name == "Bottom Bounds")
+        {
+            playerControl.StartReset(collision.gameObject.GetComponent<CinemachineImpulseSource>());
         }
     }
 }

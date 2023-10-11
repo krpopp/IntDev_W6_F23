@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class JuiceEvents : MonoBehaviour
 {
@@ -70,8 +71,9 @@ public class JuiceEvents : MonoBehaviour
     
     //called when the player is reset by falling out of the level
     //starts a counter to see when the player should reset their positon
-    public void FallDieJuiceStart()
+    public void FallDieJuiceStart(CinemachineImpulseSource source)
     {
+        studentJuice.DoCamShake(source);
         fallDead = true;
     }
 
@@ -90,9 +92,10 @@ public class JuiceEvents : MonoBehaviour
     }
 
     //called when the player is reset by the enemy
-    public void EnemyDieJuiceStart()
+    public void EnemyDieJuiceStart(CinemachineImpulseSource source)
     {
         studentJuice.StartEnemyDeathAnim();
+        studentJuice.DoCamShake(source);
         enemyDead = true;
     }
 
@@ -109,4 +112,5 @@ public class JuiceEvents : MonoBehaviour
             enemyDead = false;
         }
     }
+
 }

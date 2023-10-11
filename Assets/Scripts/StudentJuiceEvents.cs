@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class StudentJuiceEvents : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class StudentJuiceEvents : MonoBehaviour
 
     [Header("Enemy Death Juice")]
     public float enemyTimeToWait; //how long to wait after hitting an enemy
+    public float camPower; //how much the camera should shake
 
     Animator juiceAnim;
 
@@ -50,6 +52,11 @@ public class StudentJuiceEvents : MonoBehaviour
         juiceAnim.SetBool("flashColor", true);
     }
 
+    public void DoCamShake(CinemachineImpulseSource source)
+    {
+        source.GenerateImpulseWithForce(camPower);
+    }
+
     //called when the player first touches an enemy
     public void EndEnemyDieAnim()
     {
@@ -61,4 +68,5 @@ public class StudentJuiceEvents : MonoBehaviour
     {
 
     }
+
 }
